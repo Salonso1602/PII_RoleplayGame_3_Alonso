@@ -6,52 +6,80 @@
 
 <br>
 
-# Encuentros de tipos en la Tierra Media
+# Encuentros de herederos en la Tierra Media
 
-En este juego, los personajes han cobrado vida. Pero de una forma bastante desorganizada. 
+Los encuentros heredados en la Tierra Media no tienen nada que ver con personajes ancestrales que han pasado a mejor vida, sino con las similitudes que se pueden encontrar entre los componentes del juego. 
 
-Tenemos gran variedad de elementos que podemos intuír que son del mismo tipo. Pero esto no está reflejado en nuestro código. En este ejercicio vamos a modificar nuestro proyecto para mejorar el código que tenemos hasta ahora. 
+En el ejercicio anterior han encontrado algunas abstracciones útiles, pero como habrán visto, mucha de la lógica del juego se encuentra repetida en distintos objetos.
 
-## Personajes _[Characters]_
-
-Quizás hayas notado que hay varias propiedades que los personajes tienen en común unos con otros. Todos ellos:
-
-- manejan un nivel de vida
-
-- pueden ser atacados
-
-- pueden ser curados
-
-- pueden tener items
-
-Adicionalmente, los magos pueden tener elementos mágicos (a diferencia de los no-magos, que _no pueden tener elementos mágicos_). No olvides que los elementos mágicos también sirven para atacar y defender.
-
-## Elementos _[Items]_
-
-Existen muchos elementos, y podemos encontrar algunas cosas en común:
-
-- Algunos elementos son armas, que le permiten a los personajes atacar a otros. Éstas tienen un valor de ataque.
-
-- Otros elementos son de defensa y permiten defender ataques, y por ende tienen un valor de defensa.
-
-- ¡Algunos permiten atacar **y** defender! En cuyos casos tienen valor de ataque y de defensa.
-
-- Hay elementos que son mágicos y elementos que no. Esto es importante porque sólo los Magos pueden hacer uso de elementos mágicos.
-
-- No existe solamente un hechizo, ¡existen muchos! Y el libro de hechizos puede tener muchos hechizos diferentes.
+Si sólo existieran herramientas para reutilizar código...
 
 # Desafío
 
 ## Parte 1: Refactoring
 
-Refactorizen<sup>1</sup> el código de la [parte 1](https://github.com/ucudal/PII_RoleplayGame_1_Start), agregando las abstracciones que identifiquen de la descripción de elementos y personajes anterior.
-
+Refactorizen<sup>1</sup> el código de la [parte 2](https://github.com/ucudal/PII_RoleplayGame_2_Start) para aplicar técnicas de reutilización de código que conozcan.
 
 ## Parte 2: Comprobar que sigue funcionando
 
-Como bien saben, el proceso de refactoring cambia la estructura del código sin cambiar su comportamiento. Para demostrar esto, agreguen los casos de test de la [parte 1](https://github.com/ucudal/PII_RoleplayGame_1_Start#parte-4-testing) (o escribanlos si no llegaron a escribirlos) y comprueben que todo siga funcionando igual que antes (los tests dan verde).
+Como bien saben, el proceso de refactoring cambia la estructura del código sin cambiar su comportamiento. Para demostrar esto, agreguen los casos de test de la parte 2 (o escribanlos si no llegaron a escribirlos o recibieron feedback para mejorarlos) y comprueben que todo siga funcionando igual que antes (los tests dan verde).
+
+## Parte 3: Los malos (_The Bad Guys_)
+
+Crearemos un nuevo tipo de personajes: los Enemigos (_Enemies_). 
+
+Los **enemigos** son personajes (_characters_) que representan a "los malos". Los enemigos, al igual que los personajes que ya conocíamos, también tienen items para atacar y defender.
+
+También le daremos una distinción a los personajes que ya conocíamos. A partir de ahora nos referiremos a ellos como los Héroes (_Heroes_).
+
+Una diferencia entre los héroes y los enemigos es que los héroes acumulan puntos de victoria (VP), mientras que los enemigos _tienen_ un valor de puntos de victoria (VP). Cuando un héroe mata a un enemigo, el héroe gana los VP del enemigo que mató.
+
+Cada integrante del equipo deberá agregar al menos un enemigo.
+
+## Parte 4: Preparando el campo de batalla
+
+Incorporaremos otro nuevo concepto a nuestro juego de encuentros en la Tierra Media: los Encuentros (_Encounters_).
+
+Los **encuentros** son instancias donde **dos o más** personajes se encuentran para batallar (encuentros de combate). En el futuro incorporaremos otros tipos de encuentro. 
+
+En un encuentro debe haber siempre personajes _Heroe_ y personajes _Enemigo_ (al menos uno de cada uno).
+
+Todo encuentro deben exponer un método `void DoEncounter()` para ejecutarlo. Cuando el encuentro se ejecuta, los héroes batallarán contra los enemigos, de la siguiente forma:
+
+- Los enemigos atacan primero. Cada enemigo ataca únicamente a un héroe. Si hay un sólo héroe, todos los enemigos atacan al mismo. Si hay más de un enemigo y más de un héroe, el primer enemigo ataca al primer héroe, el segundo enemigo ataca al segundo héroe, y así sucesivamente. Si hay menos héroes (N) que enemigos (M), el siguiente enemigo (N+1) ataca al primero héroe, el siguiente enemigo (N+2) ataca al segundo héroe, y así sucesivamente.
+
+- Luego, los héroes sobrevivientes atacan a los enemigos. Todos los héroes atacan a cada uno de los enemigos 1 vez.
+
+- Cada vez que un héroe mata a un enemigo, ese héroe se lleva los VP del enemigo que ha vencido.
+
+- Se repite el primer punto.
+
+El encuentro termina cuando todos los héroes o todos los enemigos han muerto. Si un héroe ha conseguido 5+ (5 o más) VP, se cura.
+
+### 4.1: Tests
+
+Identifiquen los tests necesarios para incorporar el concepto de encuentro y agreguenlos al proyecto de test. Estos tests deben fallar en este punto.
+
+Incorporen los tests a la rama *master* del repositorio (utilizando Pull Requests), y creen un [_Tag_](https://git-scm.com/book/en/v2/Git-Basics-Tagging) en este commit llamado `TDD_Start`.
+
+### 4.2: El código
+
+Agreguen los encuentros y el código necesario para que funcionen según la lógica descrita anteriormente.
+
+Al finalizar este paso, los tests del punto anterior (4.1) deben pasar (dan verde).
+
+Incorporen el código a la rama *master* del repositorio (utilizando Pull Requests), y creen un [_Tag_](https://git-scm.com/book/en/v2/Git-Basics-Tagging) en este commit llamado `TDD_End`.
 
 
 *******
 
-<sup>1</sup> _«La refactorización (del inglés refactoring) es una técnica de la ingeniería de software para reestructurar un código fuente, alterando su estructura interna sin cambiar su comportamiento externo.» [Fuente](https://es.wikipedia.org/wiki/Refactorizaci%C3%B3n)_
+## Anexo: Diagrama de clases
+
+A continuación se incluye un diagrama de clases de la solución provista en src/
+
+![Class Diagram](./docs/ClassDiagram.svg)
+
+
+*******
+
+<sup>1</sup> _«La refactorización (del inglés refactoring) es una técnica de la ingeniería de software para reestructurar un código fuente, alterando su estructura interna sin cambiar su comportamiento externo.» [Fuente](https://es.wikipedia.org/wiki/Refactorizaci%C3%B3n)_. Aquí hay también una [guía de refactoring](https://refactoring.com/catalog/) muy útil. 
