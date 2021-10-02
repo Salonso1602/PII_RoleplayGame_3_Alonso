@@ -4,7 +4,7 @@ using System.Text;
 namespace Program {
     public static class ConsoleLogger 
     {
-        public static void ImprimirAtaque(IPersonaje atacante, IPersonaje atacado) 
+        public static void ImprimirAtaque(Personaje atacante, Personaje atacado) 
         {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{atacante.Nombre} atacó a {atacado.Nombre} con {atacante.Arma.Name}.");
@@ -12,18 +12,18 @@ namespace Program {
                 sb.Append($" {atacado.Nombre} quedó con {atacado.HP} HP.");
             }
             else {
-                sb.Append($" {atacado.Nombre} ha muerto.");
+                sb.Append($" {atacado.Nombre} ha muerto. \n {atacante.Nombre} gana +{atacado.XP} puntos de Experiencia");
             }
             Console.WriteLine(sb.ToString());
         }
-        public static void ImprimirCuracion(IPersonaje curador, IPersonaje curado) {
+        public static void ImprimirCuracion(Personaje curador, Personaje curado) {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{curador.Nombre} curó a {curado.Nombre}.");
             sb.Append($" {curado.Nombre} quedó con {curado.HP} HP.");
             Console.WriteLine(sb.ToString());
         }
 
-        public static void ImprimirLanzamientoHechizo(IPersonaje lanzador, Hechizo hechizo, IPersonaje objetivo) {
+        public static void ImprimirLanzamientoHechizo(Personaje lanzador, Hechizo hechizo, Personaje objetivo) {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{lanzador.Nombre} lanzó el hechizo {hechizo.Nombre} a {objetivo.Nombre}, ");
             switch (hechizo.TipoEfecto) 
@@ -37,7 +37,7 @@ namespace Program {
             }
             sb.Append($" {objetivo.Nombre} quedó con {objetivo.HP} HP.");
             if (objetivo.HP == 0) {
-                sb.Append($" {objetivo.Nombre} ha muerto.");
+                sb.Append($" {objetivo.Nombre} ha muerto.\n {lanzador.Nombre} gana +{objetivo.XP} puntos de Experiencia");
             }
             Console.WriteLine(sb.ToString());
         }

@@ -10,6 +10,9 @@ namespace Program
     public int HP{get;set;}
     //va a representar los puntos de vide del personaje en el momento dado
 
+    public int XP {get;set;}
+    //uso el nombre xp como termino mas generico de los "Puntos de victoria" que pide el ejercicio. Significan Experience Points, o sea, puntos de Experiencia
+
     public List<IItem> Inventario{get;} = new List<IItem>();
 
     public void AddItem(IItem item)
