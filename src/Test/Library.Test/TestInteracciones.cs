@@ -134,6 +134,7 @@ namespace Test.Library
         [Test]
 
         public void TestSistemaXP()
+        //se verifica la transferencia de xp entre personajes
         {
             Enano alonsoChar = new Enano("Torbjorn");
             Espada arma = new Espada("Mjollnir",150);
