@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Program
 {
-  public class Personaje : IPersonaje 
+  public class Personaje
   //me ahorro definir todos estos atributos y metodos genericos para todo tipo de personaje, y facilita el desarrollo de nuevas clases solo definiendo sus particularidades
   {
     public string Nombre{get; set;}
@@ -12,6 +12,12 @@ namespace Program
 
     public int XP {get;set;}
     //uso el nombre xp como termino mas generico de los "Puntos de victoria" que pide el ejercicio. Significan Experience Points, o sea, puntos de Experiencia
+
+    public const int K_AtaqueBase = 5;
+
+    public const int K_DefensaBase = 2;
+
+    public const int K_maxHP = 100;
 
     public List<IItem> Inventario{get;} = new List<IItem>();
 
@@ -43,7 +49,7 @@ namespace Program
     {
       get
       {
-        return this.Arma.DMG + IPersonaje.K_AtaqueBase;
+        return this.Arma.DMG + K_AtaqueBase;
       }
     }
     public IDefense Armadura
@@ -65,7 +71,7 @@ namespace Program
     {
       get
       {
-        return this.Armadura.DEF + IPersonaje.K_DefensaBase;
+        return this.Armadura.DEF + K_DefensaBase;
       }
     }
   }

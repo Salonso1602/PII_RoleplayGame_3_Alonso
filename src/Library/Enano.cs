@@ -1,11 +1,11 @@
 namespace Program
 {
-  public class Enano : Personaje , IPersonaje
+  public class Enano : Personaje
   {
     public Enano(string nombre)
     {
       this.Nombre = nombre;
-      this.HP = IPersonaje.K_maxHP;
+      this.HP = K_maxHP;
     }
   }
 }

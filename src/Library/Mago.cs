@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Program
 {
-  public class Mago : Personaje , IPersonaje
+  public class Mago : Personaje
   {
     public Mago(string nombre)
     {
       this.Nombre = nombre;
-      this.HP = IPersonaje.K_maxHP;
+      this.HP = K_maxHP;
     }
 
     public List<Hechizo> LibroEquipado
