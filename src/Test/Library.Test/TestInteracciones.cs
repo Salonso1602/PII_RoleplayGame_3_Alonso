@@ -7,7 +7,7 @@ namespace Test.Library
     public class TestInteracciones
     {
         [Test]
-        public void Ataque()
+        public void TestAtaque()
         //se testea la interacción de ataque
         {
             Mago danaChar = new Mago("Danurris");
@@ -31,7 +31,7 @@ namespace Test.Library
 
         [Test]
 
-        public void LanzamientoHechizoAtaque()
+        public void TestLanzamientoHechizoAtaque()
         //se testea la interacción de ataque con lanzamiento de hechizo
         {
             Mago danaChar = new Mago("Danurris");
@@ -65,7 +65,7 @@ namespace Test.Library
 
         [Test]
 
-        public void LanzamientoHechizoCuracion()
+        public void TestLanzamientoHechizoCuracion()
         //se testea la interacción de curación con lanzamiento de hechizo
         {
             Mago danaChar = new Mago("Danurris");
@@ -100,7 +100,7 @@ namespace Test.Library
 
         [Test]
 
-        public void Curacion()
+        public void TestCuracion()
         //se testea la interacción de curación no sobrepase la vida máxima
         {
             Mago danaChar = new Mago("Danurris");
