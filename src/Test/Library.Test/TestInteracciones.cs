@@ -130,5 +130,22 @@ namespace Test.Library
 
             Assert.AreEqual(expectedCura, alonsoChar.HP);
         }
+
+        [Test]
+
+        public void TestSistemaXP()
+        {
+            Enano alonsoChar = new Enano("Torbjorn");
+            Espada arma = new Espada("Mjollnir",150);
+            alonsoChar.AddItem(arma);
+
+            Mago danaChar = new Mago("Danurris");
+            danaChar.XP = 420;
+            
+            Interacciones.Ataque(alonsoChar, danaChar);
+
+            int expectedXP = 420;
+            Assert.AreEqual(expectedXP,alonsoChar.XP);
+        }
     }
 }
