@@ -8,6 +8,7 @@ namespace Program
     public string Nombre{get; set;}
 
     public int HP{get;set;}
+    //va a representar los puntos de vide del personaje en el momento dado
 
     public List<IItem> Inventario{get;} = new List<IItem>();
 
