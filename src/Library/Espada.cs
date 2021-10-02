@@ -1,10 +1,8 @@
 namespace Program
 {
-  public class Espada : IItem, IAttack
+  public class Espada : Item, IItem, IAttack
   {
-    public string Name{get; set;}
-
-    public int DMG{get; private set;}
+    public override int DMG{get; protected set;}
 
     public Espada(string name, int dmg)
     {
