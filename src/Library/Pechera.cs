@@ -1,6 +1,6 @@
 namespace Program
 {
-    public class Pechera : Item, IItem , IDefense
+    public class Pechera : Item
     {
         public override int DEF {get; protected set;}
         

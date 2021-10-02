@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Program
 {
-    public class Libro : Item, IItem
+    public class Libro : Item
     {
 
         private List<Hechizo> hechizosGuardados = new List<Hechizo>();

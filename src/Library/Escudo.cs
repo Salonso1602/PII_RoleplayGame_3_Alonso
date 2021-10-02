@@ -1,6 +1,6 @@
 namespace Program
 {
-  public class Escudo : Item, IItem, IDefense, IAttack
+  public class Escudo : Item
   {
     public override int DEF{get; protected set;}
 

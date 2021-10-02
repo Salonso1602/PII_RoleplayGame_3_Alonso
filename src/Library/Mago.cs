@@ -14,7 +14,7 @@ namespace Program
     {
       get
       {
-        foreach (IItem item in Inventario)
+        foreach (Item item in Inventario)
         {
           if (item is Libro)
           {

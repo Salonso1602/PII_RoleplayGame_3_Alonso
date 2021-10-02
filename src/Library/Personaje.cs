@@ -19,27 +19,27 @@ namespace Program
 
     public const int K_maxHP = 100;
 
-    public List<IItem> Inventario{get;} = new List<IItem>();
+    public List<Item> Inventario{get;} = new List<Item>();
 
-    public void AddItem(IItem item)
+    public void AddItem(Item item)
     {
       this.Inventario.Add(item);
     }
-    public void RemoveItem(IItem item)
+    public void RemoveItem(Item item)
     {
       this.Inventario.Remove(item);
     }
 
-    public IAttack Arma
+    public Item Arma
     {
       get
       {
-        IAttack mejorArma = new Espada ("Manos", 0);
-        foreach (IItem item in Inventario)
+        Item mejorArma = new Espada ("Manos", 0);
+        foreach (Item item in Inventario)
         {
-          if(item is IAttack && ((IAttack) item).DMG > mejorArma.DMG)
+          if(item.DMG>0 && item.DMG>mejorArma.DMG)
           {
-            mejorArma = (IAttack) item;
+            mejorArma = item;
           }
         }
         return mejorArma;
@@ -52,16 +52,16 @@ namespace Program
         return this.Arma.DMG + K_AtaqueBase;
       }
     }
-    public IDefense Armadura
+    public Item Armadura
     {
       get
       {
-        IDefense mejorArmadura = new Pechera ("Desnudo", 0);
-        foreach (IItem item in Inventario)
+        Item mejorArmadura = new Pechera ("Desnudo", 0);
+        foreach (Item item in Inventario)
         {
-          if(item is IDefense && ((IDefense) item).DEF > mejorArmadura.DEF)
+          if(item.DEF > 0 && item.DEF > mejorArmadura.DEF)
           {
-            mejorArmadura = (IDefense) item;
+            mejorArmadura = item;
           }
         }
         return mejorArmadura;
