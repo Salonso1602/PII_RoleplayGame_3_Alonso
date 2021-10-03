@@ -13,11 +13,29 @@ namespace Program
     public int XP {get;set;}
     //uso el nombre xp como termino mas generico de los "Puntos de victoria" que pide el ejercicio. Significan Experience Points, o sea, puntos de Experiencia
 
-    public const int K_AtaqueBase = 5;
+    public virtual int K_AtaqueBase
+    {
+      get
+      {
+        return 5;
+      }
+    }
 
-    public const int K_DefensaBase = 2;
-
-    public const int K_maxHP = 100;
+    public virtual int K_DefensaBase
+    {
+      get
+      {
+        return 5;
+      }
+    }
+    public virtual int K_maxHP 
+    {
+      get
+      {
+        return 100;
+      }
+    }
+    //hago estos stats virtuales para poder modificarlos de ser necesario, pero dejando un valor por defecto.
 
     public List<Item> Inventario{get;} = new List<Item>();
 
