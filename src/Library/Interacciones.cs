@@ -37,9 +37,9 @@ namespace Program
             if(hechizo.TipoEfecto == "Curación" && lanzador.LibroEquipado.Contains(hechizo))
             {
                 objetivo.HP += hechizo.Poder;
-                if(objetivo.HP > Personaje.K_maxHP)
+                if(objetivo.HP > objetivo.K_maxHP)
                 {
-                    objetivo.HP = Personaje.K_maxHP;
+                    objetivo.HP = objetivo.K_maxHP;
                 }
 
 
