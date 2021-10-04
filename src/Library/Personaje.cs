@@ -37,6 +37,18 @@ namespace Program
     }
     //hago estos stats virtuales para poder modificarlos de ser necesario, pero dejando un valor por defecto.
 
+    public bool isDead
+    {
+      get
+      {
+        if (this.HP==0)
+        {
+          return true;
+        }
+        return false;
+      }
+    }
+
     public List<Item> Inventario{get;} = new List<Item>();
 
     public void AddItem(Item item)

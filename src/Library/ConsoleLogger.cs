@@ -8,11 +8,11 @@ namespace Program {
         {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{atacante.Nombre} atacó a {atacado.Nombre} con {atacante.Arma.Name}.");
-            if (atacado.HP > 0) {
+            if (atacado.isDead == false) {
                 sb.Append($" {atacado.Nombre} quedó con {atacado.HP} HP.");
             }
             else {
-                sb.Append($" {atacado.Nombre} ha muerto. \n {atacante.Nombre} gana +{atacado.XP} puntos de Experiencia");
+                sb.Append($" {atacado.Nombre} ha muerto. \n {atacante.Nombre} gana {atacado.XP} puntos de Experiencia");
             }
             Console.WriteLine(sb.ToString());
         }
@@ -36,8 +36,9 @@ namespace Program {
                     break;
             }
             sb.Append($" {objetivo.Nombre} quedó con {objetivo.HP} HP.");
-            if (objetivo.HP == 0) {
-                sb.Append($" {objetivo.Nombre} ha muerto.\n {lanzador.Nombre} gana +{objetivo.XP} puntos de Experiencia");
+            if (objetivo.isDead) 
+            {
+                sb.Append($" {objetivo.Nombre} ha muerto.\n {lanzador.Nombre} gana {objetivo.XP} puntos de Experiencia");
             }
             Console.WriteLine(sb.ToString());
         }
@@ -46,6 +47,21 @@ namespace Program {
         //a través de la consola, por lo que va de la mano con esta tarea. Es una aplicación de patrón SRP.
         {
             Console.WriteLine($"{personaje.Nombre} tiene {personaje.Ataque} puntos de Ataque y {personaje.Defensa} puntos de Armadura");
+        }
+
+        public static void LevelUp(Personaje Leveleado)
+        {
+            Console.WriteLine($"{Leveleado.Nombre} sube de nivel y recupera todos sus puntos de vida!");
+        }
+        //para dar mas feedback al usuario de si se recupera un personaje por levelear
+
+        public static void PrintWin()
+        {
+            Console.WriteLine($"¡Nuestros heroes ganan!");
+        }
+        public static void PrintFail()
+        {
+            Console.WriteLine($"Nuestro heroes han caido");
         }
     }
 }
