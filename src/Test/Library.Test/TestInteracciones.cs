@@ -132,7 +132,6 @@ namespace Test.Library
         }
 
         [Test]
-
         public void TestSistemaXP()
         //se verifica la transferencia de xp entre personajes
         {
@@ -141,12 +140,30 @@ namespace Test.Library
             alonsoChar.AddItem(arma);
 
             Mago danaChar = new Mago("Danurris");
-            danaChar.XP = 420;
+            danaChar.XP = 8;
             
             Interacciones.Ataque(alonsoChar, danaChar);
 
-            int expectedXP = 420;
+            int expectedXP = 3;
             Assert.AreEqual(expectedXP,alonsoChar.XP);
+        }
+
+        [Test]
+        public void TestLevelUp()
+        {
+            Enano alonsoChar = new Enano("Torbjorn");
+            Espada arma = new Espada("Mjollnir",150);
+            alonsoChar.HP = 22;
+            alonsoChar.AddItem(arma);
+
+            Goblin goblin = new Goblin();
+            Goblin goblin2 = new Goblin();
+            Interacciones.Ataque(alonsoChar, goblin);
+            Interacciones.Ataque(alonsoChar, goblin2);
+
+            int expectedHP = 100;
+
+            Assert.AreEqual(expectedHP, alonsoChar.HP);
         }
     }
 }
