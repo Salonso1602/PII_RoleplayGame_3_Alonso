@@ -7,7 +7,7 @@ namespace Test.Library
     public class TestInteracciones
     {
         [Test]
-        public void Ataque()
+        public void TestAtaque()
         //se testea la interacción de ataque
         {
             Mago danaChar = new Mago("Danurris");
@@ -31,7 +31,7 @@ namespace Test.Library
 
         [Test]
 
-        public void LanzamientoHechizoAtaque()
+        public void TestLanzamientoHechizoAtaque()
         //se testea la interacción de ataque con lanzamiento de hechizo
         {
             Mago danaChar = new Mago("Danurris");
@@ -65,7 +65,7 @@ namespace Test.Library
 
         [Test]
 
-        public void LanzamientoHechizoCuracion()
+        public void TestLanzamientoHechizoCuracion()
         //se testea la interacción de curación con lanzamiento de hechizo
         {
             Mago danaChar = new Mago("Danurris");
@@ -100,7 +100,7 @@ namespace Test.Library
 
         [Test]
 
-        public void Curacion()
+        public void TestCuracion()
         //se testea la interacción de curación no sobrepase la vida máxima
         {
             Mago danaChar = new Mago("Danurris");
@@ -129,6 +129,41 @@ namespace Test.Library
             int expectedCura = 100;
 
             Assert.AreEqual(expectedCura, alonsoChar.HP);
+        }
+
+        [Test]
+        public void TestSistemaXP()
+        //se verifica la transferencia de xp entre personajes
+        {
+            Enano alonsoChar = new Enano("Torbjorn");
+            Espada arma = new Espada("Mjollnir",150);
+            alonsoChar.AddItem(arma);
+
+            Mago danaChar = new Mago("Danurris");
+            danaChar.XP = 8;
+            
+            Interacciones.Ataque(alonsoChar, danaChar);
+
+            int expectedXP = 3;
+            Assert.AreEqual(expectedXP,alonsoChar.XP);
+        }
+
+        [Test]
+        public void TestLevelUp()
+        {
+            Enano alonsoChar = new Enano("Torbjorn");
+            Espada arma = new Espada("Mjollnir",150);
+            alonsoChar.HP = 22;
+            alonsoChar.AddItem(arma);
+
+            Goblin goblin = new Goblin();
+            Goblin goblin2 = new Goblin();
+            Interacciones.Ataque(alonsoChar, goblin);
+            Interacciones.Ataque(alonsoChar, goblin2);
+
+            int expectedHP = 100;
+
+            Assert.AreEqual(expectedHP, alonsoChar.HP);
         }
     }
 }

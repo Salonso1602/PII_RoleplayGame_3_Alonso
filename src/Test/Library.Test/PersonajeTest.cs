@@ -100,7 +100,8 @@ namespace Test.Library
       }
 
       [Test]
-      public void LibroEquipadoTest(){
+      public void LibroEquipadoTest()
+      {
         Mago p = new Mago("Messi");
         Libro i = new Libro("El Principito");
         Hechizo e = new Hechizo("Kame-hame-ha", "Daño", 5);
@@ -109,6 +110,15 @@ namespace Test.Library
         i.AñadirHechizo(e);
 
         Assert.IsTrue(p.LibroEquipado.Contains(e));
+      }
+
+      [Test]
+      public void CharAliveTest()
+      {
+        Mago p = new Mago("Messi");
+        p.HP = 0;
+
+        Assert.IsTrue(p.isDead);
       }
     }
 }

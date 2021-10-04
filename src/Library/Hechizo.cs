@@ -2,16 +2,16 @@ using System.Linq;
 
 namespace Program {
     public class Hechizo {
-        private static string[] _tiposHechizos = {"Daño", "Curación"};
+        private static string[] tiposHechizos = {"Daño", "Curación"};
         public string Nombre { get; set; }
-        private string _tipoEfecto;
+        private string tipoEfecto;
         public string TipoEfecto {
             get {
-                return _tipoEfecto;
+                return tipoEfecto;
             }
             set {
-                if (_tiposHechizos.Contains(value)) {
-                    this._tipoEfecto = value;
+                if (tiposHechizos.Contains(value)) {
+                    this.tipoEfecto = value;
                 }
             }
         }

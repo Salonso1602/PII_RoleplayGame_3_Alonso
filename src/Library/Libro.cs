@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Program
 {
-    public class Libro : IItem
+    public class Libro : Item
     {
 
         private List<Hechizo> hechizosGuardados = new List<Hechizo>();
@@ -15,8 +15,6 @@ namespace Program
                 return this.hechizosGuardados;
             }
         }
-
-        public string Name {get;set;}
        
         public Libro (string nombre)
         {

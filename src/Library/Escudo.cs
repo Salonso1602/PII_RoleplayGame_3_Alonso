@@ -1,12 +1,10 @@
 namespace Program
 {
-  public class Escudo : IItem, IDefense, IAttack
+  public class Escudo : Item
   {
-    public string Name{get; set;}
+    public override int DEF{get; protected set;}
 
-    public int DEF{get; private set;}
-
-    public int DMG{get; private set;}
+    public override int DMG{get; protected set;}
 
     public Escudo(string name, int def, int dmg)
     {
