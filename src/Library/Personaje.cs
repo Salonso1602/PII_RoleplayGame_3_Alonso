@@ -25,7 +25,7 @@ namespace Program
     {
       get
       {
-        return 5;
+        return 2;
       }
     }
     public virtual int K_maxHP 

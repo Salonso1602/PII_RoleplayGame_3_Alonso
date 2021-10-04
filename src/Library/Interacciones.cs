@@ -16,7 +16,7 @@ namespace Program
                     if(atacante.XP >= 5)
                     {
                         atacante.HP = atacante.K_maxHP;
-                        atacante.XP = 0;
+                        atacante.XP = atacante.XP % 5;
                         levelUp = true;
                     }
                 }
@@ -39,10 +39,11 @@ namespace Program
                 {
                     objetivo.HP = 0;
                     lanzador.XP += objetivo.XP;
+
                     if(lanzador.XP >= 5)
                     {
                         lanzador.HP = lanzador.K_maxHP;
-                        lanzador.XP = 0;
+                        lanzador.XP = lanzador.XP % 5;
                         levelUp = true;
                     }
                 }
