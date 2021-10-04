@@ -6,39 +6,77 @@ namespace Program
     //lo trabajo como singleton, ya que solo va a haber un encuentro a la vez, y permitiría a futuro
     //darle atributos y modificadores especiales a los escenarios a futuro.
     {
-        private Encounter instance{get; set;}
+        private static Encounter instance{get; set;}
 
-        public Encounter Arena
+        public static Encounter Arena
         {
             get
             {
-                if (this.instance==null)
+                if (instance==null)
                 {
-                    this.instance = new Encounter();
-                    return this.instance;
+                    instance = new Encounter();
+                    return instance;
                 }
-                return this.instance;
+                return instance;
             }
         }
         private Encounter(){}
 
+        public void ClearArena()
+        {
+            this.Heroes.Clear();
+            this.Goblins.Clear();
+        }
+
+        private void ClearDead()
+        {
+            List<Personaje> bucket = new List<Personaje>();
+            foreach (Personaje hero in this.Heroes)
+            {
+                if (hero.isDead)
+                {
+                    bucket.Add(hero);
+                }
+            }
+            foreach (Personaje dead in bucket)
+            {
+                Heroes.Remove(dead);
+            }
+
+            bucket.Clear();
+
+            foreach (Personaje goblin in this.Goblins)
+            {
+                if (goblin.isDead)
+                {
+                    bucket.Add(goblin);
+                }
+            }
+            foreach (Personaje dead in bucket)
+            {
+                Goblins.Remove(dead);
+            }
+        }
+
         public List<Personaje> Heroes {get; set;} = new List<Personaje>();
         public List<Personaje> Goblins {get; set;} = new List<Personaje>();
 
-        public void añadirHeroe(Personaje Heroe) 
+        public void AddHero (Personaje Heroe) 
         {
             Heroes.Add(Heroe);
         }
 
 
-        public void añadirGoblins(Personaje Goblin) 
+        public void AddGoblins(Personaje Goblin) 
         {
             Goblins.Add(Goblin);
         }
-        public void añadirGoblins(int cantidad) 
+        public void AddGoblins(int cantidad) 
         {
-            for (int i =0; i<=cantidad; i++)
+            for (int i =0; i<cantidad; i++)
+            {
             Goblins.Add(new Goblin());
+            }
         }
         //inicialmente dejo un metodo para añadir x cantidad de goblins como enemigos genericos y otro por sobrecarga si se quiere dar un enemigo personalizado
         
@@ -55,10 +93,10 @@ namespace Program
             {
                 int remainingHeroes = this.Heroes.Count;
                 int remainingEnemies = this.Goblins.Count;
+                alreadyAttacked.Clear();
 
                 //turno de los enemigos(goblins)
-                int AttackCounter = 0;
-                while (AttackCounter != remainingEnemies)
+                while (alreadyAttacked.Count != remainingEnemies)
                 //los goblins siguen atacando hasta que todos hayan atacado, controlar el while por fuera de los foreach me deja loopear los heroes para
                 //el caso que sean menos que los enemigos
                 {
@@ -70,31 +108,26 @@ namespace Program
                             {
                                 Interacciones.Ataque(goblin, hero);
                                 alreadyAttacked.Add(goblin);
-                                AttackCounter += 1;
                                 break; //sale del foreach, pasa al siguiente heroe
                             }
                         }
-
-                        if (hero.isDead)
-                        {
-                            this.Heroes.Remove(hero);
-                        }
                     }
                 }
+                ClearDead();
                 //turno de los heroes
                 foreach (Personaje hero in this.Heroes)
                 {
                     foreach (Personaje goblin in this.Goblins)
                     {
-                        Interacciones.Ataque(hero, goblin);
-
-                        if (goblin.isDead)
+                        if (!goblin.isDead)
                         {
-                            this.Goblins.Remove(goblin);
+                            Interacciones.Ataque(hero, goblin);
                         }
                     }
                     //cada heroe ataca a todos los goblins (un poco OP pero son los protagonistas asi que pasa)
                 }
+                ClearDead();
+                //sacar las instancias de las listas debo hacerlo fuera de los foreach sino me manda error
 
                 if (this.Heroes.Count == 0) 
                 //si cualquiera de ambos bandos se termina, finaliza el encuentro
@@ -108,6 +141,8 @@ namespace Program
                     isDone = true;
                 }
             }
+            ClearArena();
+            //una vez terminado el conflicto se limpia la arena
         }
     }
 }
